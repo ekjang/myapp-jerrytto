@@ -22,6 +22,8 @@ class DhlotteryRequest extends Component {
             <div>
                 totSell: {this.props.lottoWinningInfo.totSell}
                 firstNum: {this.props.lottoWinningInfo.firstNum}
+
+                recommendNum: {this.props.recommendNum}
             </div>
         );
     }

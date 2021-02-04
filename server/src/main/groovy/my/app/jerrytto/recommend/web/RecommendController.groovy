@@ -27,7 +27,8 @@ class RecommendController {
 
     @GetMapping("many")
     def manyWinRecommend() {
-        recommendService.manyWinRecommend()
+        return ["lottoNumbers": recommendService.manyWinRecommend()]
+
     }
 
     @GetMapping("few")

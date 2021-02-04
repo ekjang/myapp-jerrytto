@@ -1,12 +1,13 @@
 package my.app.jerrytto.api.model
 
 import com.google.gson.JsonObject
+import my.app.jerrytto.common.model.CommonNum
 
 /**
  * Created by ekjan.
  *   Date : 2021-01-26 오후 6:20
  */
-class LottoRound {
+class LottoRound extends CommonNum {
     Long id;
 
     String returnValue  //데이터 존재 여부
@@ -15,13 +16,6 @@ class LottoRound {
     String whichRound;      //몇 회차
     BigDecimal winnerMoney = BigDecimal.ZERO;    //1등 상금
     BigDecimal allWinnersMoney = BigDecimal.ZERO;    //총 1등 당첨자들 합산금액
-    int firstNum;   //번호1
-    int secondNum;   //번호2
-    int thirdNum;   //번호3
-    int fourthNum;   //번호4
-    int fifthNum;   //번호5
-    int sixthNum;   //번호6
-    int bonusNum;   //보너스 번호
 
     public static LottoRound createLotto(JsonObject body){
         LottoRound entity = new LottoRound();

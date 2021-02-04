@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
-import server_url from "./../define/UrlDefine"
+import server_url from "../define/UrlDefine"
 import DhlotteryRequest from "./DhlotteryRequest"
 
 class CrawlerTemplate extends Component {
@@ -10,10 +10,22 @@ class CrawlerTemplate extends Component {
     }
 
     componentDidMount() {
-        this.getServer()
+        this.getWinning()
     }
 
-    getServer = () => {
+    getWinning = () => {
+        axios.get(server_url + "/lotto/win-num-by-round", {params: {roundNo: 921}})
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    lottoWinningInfo: res.data,
+                    isSuccess:true
+                });
+            })
+            .catch(res => console.log(res))
+    }
+
+    getWinning = () => {
         axios.get(server_url + "/lotto/win-num-by-round", {params: {roundNo: 921}})
             .then(res => {
                 console.log(res.data)

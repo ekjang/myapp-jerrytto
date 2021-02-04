@@ -24,11 +24,14 @@ class RecommendServiceImpl implements RecommendService {
 
     @Override
     def manyWinRecommend() {
-        def winInfo = statisticsService.getTotalCountByNumbers()
-        int lastRoundNo = winInfo.lastRoundNo
-        WinningCountByNum winningCountByNum = winInfo.totalWinningCountByNum
-        ObjectMapper objectMapper = new ObjectMapper()
-        Map<String, Integer> convert = objectMapper.convertValue(winningCountByNum, Map.class)
+        int bundle = 5
+        Set bundleNumbers = new HashSet()
+        while(bundleNumbers.size() < 5) {
+            def winInfo = statisticsService.getTotalCountByNumbers()
+            int lastRoundNo = winInfo.lastRoundNo
+            WinningCountByNum winningCountByNum = winInfo.totalWinningCountByNum
+            ObjectMapper objectMapper = new ObjectMapper()
+            Map<String, Integer> convert = objectMapper.convertValue(winningCountByNum, Map.class)
 
 //        List<Entry<String, Integer>> sorted = new ArrayList<Entry<String, Integer>>(convert.entrySet())
 //        Collections.sort(sorted, new Comparator<Entry<String, Integer>>() {
@@ -41,15 +44,18 @@ class RecommendServiceImpl implements RecommendService {
 //            }
 //        })
 
-        int sumWeight = lastRoundNo * 7
+            int sumWeight = lastRoundNo * 7
 
-        Map<String, Double> weight = new HashMap<String, Double>()
-        convert.each {key, val ->
-            weight.put(key, Double.valueOf(val.toString()) / sumWeight)
+            Map<String, Double> weight = new HashMap<String, Double>()
+            convert.each { key, val ->
+                weight.put(key, Double.valueOf(val.toString()) / sumWeight)
+            }
+
+            Random rand = new Random();
+//            return getWeightedRandom(weight, rand)
+            bundleNumbers.add(getWeightedRandom(weight, rand))
         }
-
-        Random rand = new Random();
-        return getWeightedRandom(weight, rand)
+        return bundleNumbers
     }
 
     @Override
