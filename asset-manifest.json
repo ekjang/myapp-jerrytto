@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/myapp-jerrytto/static/css/main.18de9e3f.chunk.css",
+    "main.js": "/myapp-jerrytto/static/js/main.59e800af.chunk.js",
+    "main.js.map": "/myapp-jerrytto/static/js/main.59e800af.chunk.js.map",
+    "runtime-main.js": "/myapp-jerrytto/static/js/runtime-main.4eaa96e6.js",
+    "runtime-main.js.map": "/myapp-jerrytto/static/js/runtime-main.4eaa96e6.js.map",
+    "static/js/2.a3313419.chunk.js": "/myapp-jerrytto/static/js/2.a3313419.chunk.js",
+    "static/js/2.a3313419.chunk.js.map": "/myapp-jerrytto/static/js/2.a3313419.chunk.js.map",
+    "static/js/3.d48becf7.chunk.js": "/myapp-jerrytto/static/js/3.d48becf7.chunk.js",
+    "static/js/3.d48becf7.chunk.js.map": "/myapp-jerrytto/static/js/3.d48becf7.chunk.js.map",
+    "index.html": "/myapp-jerrytto/index.html",
+    "static/css/main.18de9e3f.chunk.css.map": "/myapp-jerrytto/static/css/main.18de9e3f.chunk.css.map",
+    "static/js/2.a3313419.chunk.js.LICENSE.txt": "/myapp-jerrytto/static/js/2.a3313419.chunk.js.LICENSE.txt",
+    "static/media/bg_jerry.b7ae9b69.svg": "/myapp-jerrytto/static/media/bg_jerry.b7ae9b69.svg",
+    "static/media/main_jerry.e7dfcf1f.svg": "/myapp-jerrytto/static/media/main_jerry.e7dfcf1f.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4eaa96e6.js",
+    "static/js/2.a3313419.chunk.js",
+    "static/css/main.18de9e3f.chunk.css",
+    "static/js/main.59e800af.chunk.js"
+  ]
+}
