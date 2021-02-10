@@ -29,18 +29,33 @@ class StatisticsController {
         statisticsService.initWinningInfo()
     }
 
+    /**
+     * 보너스번호 포함한 당첨번호들의 번호별 당첨 횟수 통계
+     *  - flag : 1
+     * @return
+     */
     @GetMapping("totWinCntNum")
     def getTotalCountByNumbers() {
-        statisticsService.getTotalCountByNumbers()
+        statisticsService.getWinningCountByNumbers(1)
     }
 
+    /**
+     * 보너스번호 제외한 1등 당첨번호들의 번호별 당첨 횟수 통계
+     *  - flag : 2
+     * @return
+     */
     @GetMapping("winCntNum")
-    def getWinningCountByNumbers() {
-        statisticsService.getWinningCountByNumbers()
+    def getWinningCountByNumbers(int flag) {
+        statisticsService.getWinningCountByNumbers(2)
     }
 
+    /**
+     * 보너스번호의 번호별 당첨 횟수 통계
+     *  - flag : 3
+     * @return
+     */
     @GetMapping("bonusCntNum")
     def getBonusCountByNumbers() {
-        statisticsService.getBonusCountByNumbers()
+        statisticsService.getWinningCountByNumbers(3)
     }
 }

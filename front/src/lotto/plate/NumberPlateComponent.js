@@ -4,11 +4,9 @@ import NumberPlateBoxComponent from "./NumberPlateBoxComponent";
 import OptionPlateComponent from "./OptionPlateComponent";
 
 class NumberPlateComponent extends Component {
-
     allHandleChange = (e) => {
         const {checked} = e.target;
         this.props.allHandleChange(checked)
-        console.log("this.props.isRandom:"+this.props.isRandom)
     }
 
     render() {

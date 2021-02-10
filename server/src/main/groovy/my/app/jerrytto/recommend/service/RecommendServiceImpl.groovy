@@ -7,6 +7,9 @@ import my.app.jerrytto.statistics.service.StatisticsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+import java.util.stream.Collector
+import java.util.stream.Collectors
+
 /**
  * Created by ekjan.
  *   Date : 2021-01-28 오후 6:19
@@ -25,11 +28,11 @@ class RecommendServiceImpl implements RecommendService {
     @Override
     def manyWinRecommend() {
         int bundle = 5
-        Set bundleNumbers = new HashSet()
+        List bundleNumbers = new ArrayList()
         while(bundleNumbers.size() < 5) {
-            def winInfo = statisticsService.getTotalCountByNumbers()
+            def winInfo = statisticsService.getWinningCountByNumbers(1)
             int lastRoundNo = winInfo.lastRoundNo
-            WinningCountByNum winningCountByNum = winInfo.totalWinningCountByNum
+            WinningCountByNum winningCountByNum = winInfo.winningCountByNum
             ObjectMapper objectMapper = new ObjectMapper()
             Map<String, Integer> convert = objectMapper.convertValue(winningCountByNum, Map.class)
 
@@ -52,7 +55,6 @@ class RecommendServiceImpl implements RecommendService {
             }
 
             Random rand = new Random();
-//            return getWeightedRandom(weight, rand)
             bundleNumbers.add(getWeightedRandom(weight, rand))
         }
         return bundleNumbers
@@ -73,8 +75,13 @@ class RecommendServiceImpl implements RecommendService {
         return null
     }
 
+    /**
+     * 랜덤 번호 추출 알고리즘
+     * @param selectedNumbers
+     * @return
+     */
     def getRandom(List selectedNumbers) {
-        Set lottoNumbers = new HashSet()
+        List lottoNumbers = new ArrayList()
 
         while(lottoNumbers.size() < 7) {
             def n = selectedNumbers[Math.floor(Math.random() * selectedNumbers.size())]
@@ -85,12 +92,16 @@ class RecommendServiceImpl implements RecommendService {
         return lottoNumbers
     }
 
-//    public static <E> E getWeightedRandom(Map<E, Double> weights, Random random) {
+    /**
+     * 당첨이 많된 번호의 가중치 부여한 추출 알고리즘
+     * @param weights
+     * @param random
+     * @return
+     */
     def getWeightedRandom(Map<String, Double> weights, Random random) {
-        Set lottoNumbers = new HashSet()
+        List lottoNumbers = new ArrayList()
 
         while(lottoNumbers.size() < 7) {
-
             def result = null;
             double bestValue = Double.MAX_VALUE;
 
@@ -102,7 +113,6 @@ class RecommendServiceImpl implements RecommendService {
                 }
             }
 
-//            return result;
             def n = Integer.parseInt((result.toString()).replace("num", ""))
             if (!lottoNumbers.contains(n)) {
                 lottoNumbers.add(n)

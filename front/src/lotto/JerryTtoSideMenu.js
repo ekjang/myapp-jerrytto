@@ -23,9 +23,9 @@ class JerryTtoSideMenu extends Component {
                     recommend={this.props.recommend}
                     isRandom={this.props.isRandom}
                 />
-                <ApiServerRequest
-                    recommend={this.props.recommend}
-                />
+                {/*<ApiServerRequest*/}
+                {/*    recommend={this.props.recommend}*/}
+                {/*/>*/}
             </div>
         );
     }

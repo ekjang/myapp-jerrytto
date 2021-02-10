@@ -22,10 +22,10 @@ class StatisticsServiceImpl implements StatisticsService {
     ConvertService convertService
 
 
-    List<LottoRound> allWinningInfo
-    WinningCountByNum totalWinningCountByNum
-    WinningCountByNum winningCountByNum
-    WinningCountByNum bonusCountByNum
+    List<LottoRound> allWinningInfo //모든 회차의 당첨 정보
+    WinningCountByNum totalWinningCountByNum //1등번호+보너스번호의 번호별 당첨 횟수
+    WinningCountByNum winningCountByNum //1등번호의 번호별 당첨 횟수
+    WinningCountByNum bonusCountByNum //보너스번호의 번호별 당첨 횟수
     int[] totalCount
     int[] winningCount
     int[] bonusCount
@@ -34,8 +34,8 @@ class StatisticsServiceImpl implements StatisticsService {
     def getSummary() {
         if(allWinningInfo == null || allWinningInfo.size() == 0) {
             initWinningInfo()
-            getWinningCountByNumbers()
-            getBonusCountByNumbers()
+            getWinningCountByNumbers(2)
+            getWinningCountByNumbers(3)
         }
         return [
                 "allInfo" : allWinningInfo,
@@ -112,40 +112,51 @@ class StatisticsServiceImpl implements StatisticsService {
         //delete winning info
     }
 
+    /**
+     * 당첨번호별 당첨 횟수 통계
+     *  - flag 1: 1등번호+보너스번호의 번호별 당첨 횟수
+     *  - flag 2: 1등번호의 번호별 당첨 횟수
+     *  - flag 3: 보너스번호의 번호별 당첨 횟수
+     * @param flag
+     * @return
+     */
     @Override
-    def getTotalCountByNumbers() {
+    def getWinningCountByNumbers(int flag) {
+
+        def lastRoundNo
+        def countByNum
+
         if(allWinningInfo == null || allWinningInfo.size() == 0) {
             initWinningInfo()
         }
-        totalWinningCountByNum = new WinningCountByNum()
-        totalWinningCountByNum = convertService.convertArrayToClass(totalCount, WinningCountByNum)
-        return ["lastRoundNo" : allWinningInfo.size(),
-                "totalWinningCountByNum" : totalWinningCountByNum
-        ]
-    }
+        lastRoundNo = allWinningInfo.size()
 
-    @Override
-    def getWinningCountByNumbers() {
-        if(allWinningInfo == null || allWinningInfo.size() == 0) {
-            initWinningInfo()
+        switch (flag) {
+            case 1:
+                totalWinningCountByNum = new WinningCountByNum()
+                totalWinningCountByNum = convertService.convertArrayToClass(totalCount, WinningCountByNum)
+                countByNum = totalWinningCountByNum
+                break
+            case 2:
+                winningCountByNum = new WinningCountByNum()
+                winningCountByNum = convertService.convertArrayToClass(winningCount, WinningCountByNum)
+                countByNum = winningCountByNum
+                break
+            case 3:
+                bonusCountByNum = new WinningCountByNum()
+                bonusCountByNum = convertService.convertArrayToClass(bonusCount, WinningCountByNum)
+                countByNum = bonusCountByNum
+                break
+            default:
+                totalWinningCountByNum = new WinningCountByNum()
+                totalWinningCountByNum = convertService.convertArrayToClass(totalCount, WinningCountByNum)
+                countByNum = totalWinningCountByNum
+                break
         }
-        winningCountByNum = new WinningCountByNum()
 
-        winningCountByNum = convertService.convertArrayToClass(winningCount, WinningCountByNum)
-        return ["lastRoundNo" : allWinningInfo.size(),
-                "winningCountByNum" : winningCountByNum
+        return ["lastRoundNo" : lastRoundNo,
+                "winningCountByNum" : countByNum
         ]
     }
 
-    @Override
-    def getBonusCountByNumbers() {
-        if(allWinningInfo == null || allWinningInfo.size() == 0) {
-            initWinningInfo()
-        }
-        bonusCountByNum = new WinningCountByNum()
-        bonusCountByNum = convertService.convertArrayToClass(bonusCount, WinningCountByNum)
-        return ["lastRoundNo" : allWinningInfo.size(),
-                "bonusCountByNum" : bonusCountByNum
-        ]
-    }
 }

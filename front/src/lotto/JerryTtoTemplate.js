@@ -6,6 +6,7 @@ import JerryTtoTopMenu from "./JerryTtoTopMenu";
 import "./JerryTtoStyle.css";
 import axios from "axios";
 import server_url from "./define/UrlDefine";
+import LottoBoxComponent from "./numberBox/LottoBoxComponent";
 
 class JerryTtoTemplate extends Component {
 
@@ -16,6 +17,8 @@ class JerryTtoTemplate extends Component {
         lottoNumbers : [], //"만들어" 결과 번호 배열
         recommend: '0', //번호 생성 알고리즘 선택 (0: 랜덤 번호/1: 많이 당첨/2: 많이 당첨 안된/3: 추천)
         isRandom: true //랜덤 번호 체크박스 여부
+        , drwNo: '' ////express test
+        , drwNoDate: ''
     }
 
     componentDidMount() {
@@ -27,19 +30,31 @@ class JerryTtoTemplate extends Component {
         this.optionVal = "Include" //기본 숫자 Include
         this.allHandleChange(true);
         this.setState({allCheck: this.allCheck, optionVal: this.optionVal, selected});
+
+        console.log("call before")
+        ////express test
+        fetch('/getLotto')
+            .then(res => res.json())
+            .then(data => this.setState({drwNo: data.drwNo, drwNoDate: data.drwNoDate}))
+        console.log("call after")
     }
 
     //번호 생성 알고리즘 선택 시
     selectHandelChange = (e) => {
-        console.log(e)
-        console.log(e.target.value)
+        // console.log(e)
         if(e.target.value === '0' || e.target.value === 0) {
             this.allHandleChange(true);
             this.setState({recommend: e.target.value, isRandom: true});
         } else {
-            alert("서비스 준비중입니다.")
             this.allHandleChange(false)
             this.setState({recommend: e.target.value, isRandom: false})
+            if(e.target.value === '1' || e.target.value === 1) {
+                alert("서비스 테스트 중입니다.")
+            } else {
+                alert("기다려요😅")
+                this.allHandleChange(true);
+                this.setState({recommend: '0', isRandom: true});
+            }
         }
     }
 
@@ -95,28 +110,40 @@ class JerryTtoTemplate extends Component {
     //"만들어" 버튼 클릭
     handleButtonOnClick = () => {
         const {recommend} = this.state
-        console.log(recommend)
         if(recommend === '0' || recommend === 0) {
             this.recommend0()
         } else if(recommend === '1' || recommend === 1){
+            alert("번호를 5개 생성합니다.")
             this.recommend1()
         }
     }
 
     recommend1 = () => {
+        const {lottoNumbers} = this.state
+
         axios.get(server_url + "/recommend/many")
             .then(res => {
-                console.log(res.data)
-                this.setState({
-                    lottoNumbers: res.data,
-                    isSuccess:true
-                });
+
+                //////////////////////////////////////////
+                //object 일 때
+                // Object.keys(a).map( v => {
+                //     var obj = {}
+                //     obj[v] = a[v]
+                //     return obj
+                // } )
+
+                let recommendDatas = res.data.lottoNumbers
+                recommendDatas.map((recommendNumber) =>
+                    lottoNumbers.push(recommendNumber)
+                )
+                this.setState({lottoNumbers});
+
             })
             .catch(res => console.log(res))
     }
 
     recommend0 = () => {
-        const {selected, lottoNumbers, optionVal} = this.state
+        const {selected, optionVal} = this.state
         const numbers = [];
         let selectedNumberCount = 0;
 

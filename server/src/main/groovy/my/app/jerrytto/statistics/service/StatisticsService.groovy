@@ -11,7 +11,5 @@ interface StatisticsService {
     def addOneWinningInfo()
     def updateWinningInfo()
     def deleteAllWinningInfo()
-    def getTotalCountByNumbers()
-    def getWinningCountByNumbers()
-    def getBonusCountByNumbers()
+    def getWinningCountByNumbers(int flag)
 }
