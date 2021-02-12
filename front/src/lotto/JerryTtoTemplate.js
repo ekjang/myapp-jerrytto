@@ -33,10 +33,10 @@ class JerryTtoTemplate extends Component {
 
         console.log("call before")
         ////express test
-        fetch('/getLotto')
-            .then(res => res.json())
-            .then(data => this.setState({drwNo: data.drwNo, drwNoDate: data.drwNoDate}))
-        console.log("call after")
+        // fetch('/getLotto')
+        //     .then(res => res.json())
+        //     .then(data => this.setState({drwNo: data.drwNo, drwNoDate: data.drwNoDate}))
+        // console.log("call after")
     }
 
     //번호 생성 알고리즘 선택 시
@@ -49,7 +49,7 @@ class JerryTtoTemplate extends Component {
             this.allHandleChange(false)
             this.setState({recommend: e.target.value, isRandom: false})
             if(e.target.value === '1' || e.target.value === 1) {
-                alert("서비스 테스트 중입니다.")
+                // alert("서비스 테스트 중입니다.")
             } else {
                 alert("기다려요😅")
                 this.allHandleChange(true);
@@ -73,7 +73,7 @@ class JerryTtoTemplate extends Component {
         this.setState({optionVal: value})
     }
 
-    //"지워"" 버튼 클릭
+    //"지워" 버튼 클릭
     clearButtonOnClick = () => {
         const {lottoNumbers} = this.state
         if(lottoNumbers.length > 0) {
