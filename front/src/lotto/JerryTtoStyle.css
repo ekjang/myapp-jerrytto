@@ -7,7 +7,8 @@
 
 
 .lotto-random-main {
-    width: 100%;
+    width: 970px;
+    /*width: 100%;*/
     height: 80%;
     display: flex;
     opacity: 0.8
@@ -91,12 +92,12 @@
 
 @media (max-width: 479px){
     .lotto-random-template{
-        width: 479px;
-        height: 766px;
+        /*width: 479px;*/
+        /*height: 766px;*/
     }
 
     .lotto-random-main{
-        width: 479px;
+        /*width: 479px;*/
     }
 
     .lotto-random-header{
@@ -110,11 +111,11 @@
     }
 
     .lotto-random-sidemenu{
-        width: 479px;
-        height: 550px;
+        /*width: 479px;*/
+        /*height: 550px;*/
     }
 
     .lotto-random-contents{
-        width: 467px;
+        /*width: 467px;*/
     }
 }
