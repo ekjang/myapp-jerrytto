@@ -9,7 +9,7 @@ class SelectBoxTemplate extends Component {
     render() {
         return (
             <div className="lotto-select-style">
-                랜덤 추천1 추천2 추천3
+                {/*랜덤 추천1 추천2 추천3*/}
                 <select value={this.props.recommend} onChange={this.selectHandleChange}>
                     <option value={0}>랜덤 번호</option>
                     <option value={1}>많이 당첨된 번호</option>
