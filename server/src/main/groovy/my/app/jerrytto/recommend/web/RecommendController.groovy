@@ -26,14 +26,14 @@ class RecommendController {
     }
 
     @GetMapping("many")
-    def manyWinRecommend() {
-        return ["lottoNumbers": recommendService.manyWinRecommend()]
+    def manyWinRecommend(int bundle) {
+        return ["lottoNumbers": recommendService.manyWinRecommend(bundle)]
 
     }
 
     @GetMapping("few")
-    def fewWinRecommend() {
-
+    def fewWinRecommend(int bundle) {
+        return ["lottoNumbers": recommendService.fewWinRecommend(bundle)]
     }
 
     @GetMapping("special")

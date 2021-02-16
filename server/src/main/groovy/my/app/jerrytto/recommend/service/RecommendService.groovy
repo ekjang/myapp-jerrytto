@@ -6,8 +6,8 @@ package my.app.jerrytto.recommend.service
  */
 interface RecommendService {
     def randomRecommend(List selectedNumbers)
-    def manyWinRecommend()
-    def fewWinRecommend()
+    def manyWinRecommend(int bundle)
+    def fewWinRecommend(int bundle)
     def specialRecommend()
     def customRecommend()
 }

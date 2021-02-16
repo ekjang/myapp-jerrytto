@@ -7,7 +7,7 @@ class JerryTtoContents extends Component {
         const lottoNumbers = this.props.lottoNumbers
         return (
             <div className="lotto-random-contents">
-                <div className="blank-style">
+                <div className="clear-style">
                     <button className="clear-button" onClick={this.props.clearButtonOnClick}>지워</button>
                 </div>
                 <div>

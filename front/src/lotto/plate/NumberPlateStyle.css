@@ -52,3 +52,9 @@
 input[type=checkbox] {
     transform: scale(1.5);
 }
+
+@media (max-width: 479px){
+    .number-plate-contents{
+        width: 479px;
+    }
+}
